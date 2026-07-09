@@ -1,0 +1,14 @@
+# Secrets
+.env
+
+# Local runtime files
+.opencode-smoke/
+.logs/
+.tmp/
+
+# Build & generated output
+dist/
+output/
+
+# Dependencies
+node_modules/
