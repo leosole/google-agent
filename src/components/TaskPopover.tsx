@@ -5,7 +5,7 @@ import { parseDate } from '../utils/dateUtils'
 
 interface TaskPopoverProps {
   task: any
-  extraFields?: string[]
+  popupFields?: string[]
   onClose: () => void
 }
 
@@ -37,7 +37,7 @@ const STATUS_LABEL: Record<string, string> = {
   'Não iniciado': 'Não iniciado'
 }
 
-export const TaskPopover: React.FC<TaskPopoverProps> = ({ task, extraFields = [], onClose }) => {
+export const TaskPopover: React.FC<TaskPopoverProps> = ({ task, popupFields = [], onClose }) => {
   const ref = useRef<HTMLDivElement>(null)
   const statuses = getTaskStatuses(task)
 
@@ -164,9 +164,9 @@ export const TaskPopover: React.FC<TaskPopoverProps> = ({ task, extraFields = []
             )}
           </div>
 
-          {extraFields.length > 0 && (
+          {popupFields.length > 0 && (
             <div className="border-t border-border pt-2 space-y-1.5 text-xs">
-              {extraFields.map(field => {
+              {popupFields.map(field => {
                 const val = task[field]
                 if (val === undefined || val === null || val === '') return null
                 return (

@@ -11,11 +11,12 @@ import type { Granularity, TimelineData } from '../utils/dateUtils'
 interface TimelineProps {
   tasks: any[]
   title?: string
-  extraFields?: string[]
+  filterFields?: string[]
+  popupFields?: string[]
   sheetUrl?: string | null
 }
 
-export const Timeline: React.FC<TimelineProps> = ({ tasks, title = 'Timeline', extraFields = [], sheetUrl }) => {
+export const Timeline: React.FC<TimelineProps> = ({ tasks, title = 'Timeline', filterFields = [], popupFields = [], sheetUrl }) => {
   const [filter, setFilter] = useState('')
   const [granularity, setGranularity] = useState<Granularity>('week')
   const [mouseDatePx, setMouseDatePx] = useState<number | undefined>()
@@ -36,12 +37,12 @@ export const Timeline: React.FC<TimelineProps> = ({ tasks, title = 'Timeline', e
   // Compute filter options from tasks
   const filterOptions = useMemo(() => {
     const opts: Record<string, string[]> = {}
-    if (!extraFields.length) return opts
-    extraFields.forEach(f => {
+    if (!filterFields.length) return opts
+    filterFields.forEach(f => {
       opts[f] = [...new Set(tasks.map(t => String(t[f] ?? '')).filter(Boolean))].sort()
     })
     return opts
-  }, [tasks, extraFields])
+  }, [tasks, filterFields])
 
   const handleExtraFieldFilter = (field: string, value: string) => {
     setExtraFieldFilters(prev => {
@@ -265,7 +266,7 @@ export const Timeline: React.FC<TimelineProps> = ({ tasks, title = 'Timeline', e
       <Legend />
 
       {selectedTask && (
-        <TaskPopover task={selectedTask} extraFields={extraFields} onClose={() => setSelectedTask(null)} />
+        <TaskPopover task={selectedTask} popupFields={popupFields} onClose={() => setSelectedTask(null)} />
       )}
     </div>
   )
