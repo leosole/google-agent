@@ -1,6 +1,6 @@
-# Google Agent Timeline
+# Google Agent
 
-Interactive Gantt-style timeline viewer generated from Google Sheets data.
+Google Workspace MCP agent for Sheets, Drive, and Slides. Generates interactive timelines and presentations.
 
 ## Prerequisites
 
@@ -8,7 +8,7 @@ Interactive Gantt-style timeline viewer generated from Google Sheets data.
 - Python 3.10+
 - `uv`
 - `opencode`
-- Google Cloud project with Sheets + Drive APIs enabled
+- Google Cloud project with Sheets + Drive + Slides APIs enabled
 
 ## Setup
 
@@ -19,7 +19,11 @@ cp .env.example .env
 opencode mcp auth workspace-mcp
 ```
 
-## Generating a timeline
+## Modes
+
+### Timeline Generation
+
+Interactive Gantt-style timeline viewer generated from Google Sheets data.
 
 ```bash
 # 1. Fetch data from Google Sheets via MCP
@@ -37,15 +41,44 @@ npx tsx scripts/generate.ts \
 
 Output: `output/<SHEET_NAME>/<TAB_NAME>/timeline.html`
 
+### Presentation Mode
+
+Create Google Slides presentations by combining templates with spreadsheet data.
+
+```bash
+# 1. Copy template
+node scripts/copy-presentation.cjs <TEMPLATE_ID> "New Presentation Name"
+
+# 2. Read data from spreadsheet
+node scripts/read-sheet.cjs <SPREADSHEET_ID>
+
+# 3. Get presentation structure
+node scripts/get-presentation.cjs <NEW_PRESENTATION_ID>
+
+# 4. Get slide details
+node scripts/get-slide.cjs <PRESENTATION_ID> <SLIDE_ID>
+
+# 5. Apply batch updates (replace text or delete slides)
+# Create requests.json with your changes, then:
+node scripts/batch-update.cjs <PRESENTATION_ID> requests.json
+```
+
 ## Scripts
 
-- `scripts/fetch-sheet.cjs` — fetch sheet data from workspace-mcp
-- `scripts/generate.ts` — build and generate self-contained HTML
-- `scripts/start-workspace-mcp.sh` — start MCP server
-- `scripts/smoke-test.sh` — MCP integration test
-- `scripts/show-login-link.sh` — print OAuth login URL
+| Script | Purpose |
+|--------|---------|
+| `scripts/start-workspace-mcp.sh` | Start MCP server |
+| `scripts/smoke-test.sh` | MCP integration test |
+| `scripts/show-login-link.sh` | Print OAuth login URL |
+| `scripts/fetch-sheet.cjs` | Fetch sheet data for timelines |
+| `scripts/generate.ts` | Build self-contained HTML timeline |
+| `scripts/copy-presentation.cjs` | Copy a presentation template |
+| `scripts/get-presentation.cjs` | Get presentation structure |
+| `scripts/get-slide.cjs` | Get slide details |
+| `scripts/read-sheet.cjs` | Read spreadsheet data |
+| `scripts/batch-update.cjs` | Apply batch updates to presentation |
 
-## Features
+## Timeline Features
 
 - Multi-status task detection (Fazendo, Atrasado, Concluído, Não iniciado)
 - Dark mode toggle
@@ -53,3 +86,10 @@ Output: `output/<SHEET_NAME>/<TAB_NAME>/timeline.html`
 - Status and field filters
 - Click-to-view popover with full task details
 - Self-contained HTML (works from `file://`)
+
+## Presentation Features
+
+- Template-based (visual only — all content replaced)
+- Batch text replacement
+- Slide deletion for unmodified content
+- Supports Sheets + Drive + Slides APIs
