@@ -35,5 +35,5 @@ mkdir -p "${LOG_DIR}"
 
 echo "workspace-mcp logs: ${LOG_FILE}"
 
-# Use complete tier to expose the full sheets/drive tool surface.
-uvx workspace-mcp --transport streamable-http --tools sheets drive --tool-tier complete 2>&1 | tee -a "${LOG_FILE}"
+# Use complete tier to expose the full sheets/drive/slides tool surface.
+uvx workspace-mcp --transport streamable-http --tools sheets drive slides --tool-tier complete 2>&1 | tee -a "${LOG_FILE}"
