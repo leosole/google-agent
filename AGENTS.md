@@ -57,6 +57,7 @@ After MCP is authenticated, use one of the following modes:
 
 - **[Timeline Generation](AGENTS.timeline.md)** — Generate interactive Gantt-style timeline HTML from Google Sheets
 - **[Presentation Mode](AGENTS.presentation.md)** — Create/edit Google Slides presentations by combining templates with spreadsheet data
+- **[Meeting Summarizer](AGENTS.meeting.md)** — Summarize meeting transcripts, extract action points, and search past meetings
 - **[Update & Rebase Mode](AGENTS.update.md)** — Check for updates and rebase with conflict resolution
 
 ## Expected MCP Runtime
