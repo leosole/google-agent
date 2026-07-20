@@ -59,7 +59,7 @@ async function main() {
     name: 'get_page',
     arguments: {
       presentation_id: PRESENTATION_ID,
-      page_id: SLIDE_ID
+      page_object_id: SLIDE_ID
     }
   }, sessionId);
 

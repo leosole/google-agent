@@ -13,7 +13,9 @@
     "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-popover": "^1.0.7",
     "@tailwindcss/vite": "^4.3.2",
+    "archiver": "^8.0.0",
     "dayjs": "^1.11.10",
+    "jszip": "^3.10.1",
     "lucide-react": "^0.292.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
